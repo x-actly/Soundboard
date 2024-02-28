@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Welcome to the GitHub repository of the Soundboard App! This SoundboardApp allows you to create a simple soundboard using the `tkinter` library of Python and `pygame` for playing sounds.
+Welcome to the GitHub repository of the Soundboard App! This Soundboard App allows you to create a simple soundboard using the `tkinter` library of Python and `pygame` for playing sounds.
 
 ## Table of Contents
 
