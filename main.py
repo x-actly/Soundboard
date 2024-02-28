@@ -44,10 +44,10 @@ class SoundboardApp:
                 mixer.music.load(sound_file)
                 mixer.music.play()
             except pygame.error as e:
-                print(f"Fehler beim Laden der Sounddatei: {e}")
+                print(f"Error loading soundfile: {e}")
 
     def configure_button(self, event, idx, name_var):
-        new_name = simpledialog.askstring("Button konfigurieren", f"Gib einen neuen Namen für Button {idx+1} ein:", initialvalue=name_var.get())
+        new_name = simpledialog.askstring("Button Configuration", f"Set a new button name {idx+1} :", initialvalue=name_var.get())
         if new_name:
             name_var.set(new_name)
 
@@ -62,7 +62,7 @@ class SoundboardApp:
 
     def save_config(self, event=None):
         self.save_config_to_file(self.config_file_path)
-        # Setze den visuellen Zustand der Buttons zurück
+        # Set visual state of button
         self.reset_button_state()
 
     def reset_button_state(self):
@@ -81,7 +81,7 @@ class SoundboardApp:
             section_name = f"Button_{i + 1}"
             sound_file = button_data["sound_file"] if button_data["sound_file"] is not None else ""
 
-            # Füge die Sektion nur hinzu, wenn sie noch nicht vorhanden ist
+            # Set section if its not still created 
             if not config.has_section(section_name):
                 config.add_section(section_name)
 
@@ -93,7 +93,7 @@ class SoundboardApp:
                 config.write(configfile)
             print(f"Configuration saved to {file_path}")
         except Exception as e:
-            print(f"Fehler beim Schreiben der Konfigurationsdatei: {e}")
+            print(f"Error writing config file: {e}")
 
     def load_config(self, file_path=None):
         if file_path is None:
@@ -112,7 +112,7 @@ class SoundboardApp:
                     button_data["sound_file"] = sound_file if sound_file != "" else None
                     print(f"Loaded config for Button {i+1}: Name={button_data['name'].get()}, Sound_file={button_data['sound_file']}")
         except (FileNotFoundError, configparser.Error) as e:
-            print(f"Fehler beim Laden der Konfiguration: {e}")
+            print(f"Error loading config file: {e}")
 
     def load_config_from_file(self, event=None):
         selected_file = filedialog.askopenfilename(filetypes=[("INI files", "*.ini")])
@@ -120,10 +120,10 @@ class SoundboardApp:
             try:
                 self.config_file_path = selected_file
                 self.load_config(selected_file)
-                self.reset_button_state()  # Hier wird die Methode aufgerufen
-                messagebox.showinfo("Konfiguration geladen", f"Die Konfiguration wurde aus {selected_file} geladen.")
+                self.reset_button_state()  # load reset button method
+                messagebox.showinfo("Configuration loaded", f"The configuration has loaded from {selected_file}.")
             except Exception as e:
-                messagebox.showerror("Fehler", f"Fehler beim Laden der Konfiguration: {e}")
+                messagebox.showerror("Error", f"Error loading configuration file: {e}")
 
 if __name__ == "__main__":
     root = tk.Tk()
